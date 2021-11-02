@@ -12,7 +12,7 @@ export default class StepSlider {
 	_render () {
 		let slider = this._createSliderElement();
 		let sliderThumb = slider.querySelector('.slider__thumb');
-		sliderThumb.style.left = `${this._value / this._steps * 100}%`
+		sliderThumb.style.left = `${this._value / --this._steps * 100}%`
 		const thumbMoveHandler = this._thumbMoveHandler.bind(this);
 		const sliderClickHandler = this._sliderClickHandler.bind(this);
 
@@ -30,7 +30,7 @@ export default class StepSlider {
 				</div>
 				<div class="slider__progress" style="width: ${this._value / this._steps * 100}%;"></div>
 				<div class="slider__steps">
-					${new Array(this._steps).fill('<span></span>').join('')}
+					${new Array(++this._steps).fill('<span></span>').join('')}
 				</div>
 			</div>
 		`.trim();
