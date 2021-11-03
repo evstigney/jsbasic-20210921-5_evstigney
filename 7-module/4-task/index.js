@@ -1,6 +1,6 @@
 export default class StepSlider {
   constructor({ steps, value = 0 }) {
-		this._steps = steps;
+		this._steps = --steps;
 		this._value = value;
 		this._slider = this._render();
   }
@@ -28,7 +28,7 @@ export default class StepSlider {
 				<div class="slider__thumb" style="left: 50%;">
 					<span class="slider__value">${this._value}</span>
 				</div>
-				<div class="slider__progress" style="width: ${this._value / this._steps * 100}%;"></div>
+				<div class="slider__progress" style="width: ${this._value / ++this._steps * 100}%;"></div>
 				<div class="slider__steps">
 					${new Array(++this._steps).fill('<span></span>').join('')}
 				</div>
@@ -43,7 +43,7 @@ export default class StepSlider {
 
 	_getValue (event) {
 		const steps = this._slider.querySelectorAll('.slider__steps span');
-		const stepWidth = this._slider.clientWidth / (this._steps - 1);
+		const stepWidth = this._slider.clientWidth / (this._steps);
 		const area = {
 			min: 0,
 			max: this._slider.clientWidth,
@@ -73,7 +73,7 @@ export default class StepSlider {
 
 	_sliderClickHandler (event) {
 		const slider = event.target.closest('.slider');
-		const stepWidth = this._slider.clientWidth / (this._steps - 1);
+		const stepWidth = this._slider.clientWidth / (this._steps);
 		const value = this._getValue(event);
 		const stepWidthInPercents = Math.round(stepWidth * 100 / slider.clientWidth);
 		slider.querySelector('.slider__thumb').style.left = `${value * stepWidthInPercents}%`;
