@@ -43,7 +43,7 @@ export default class StepSlider {
 
 	_getValue (event) {
 		const steps = this._slider.querySelectorAll('.slider__steps span');
-		const stepWidth = this._slider.clientWidth / (this._steps - 1);
+		let stepWidth = this._slider.clientWidth / this._steps;
 		const area = {
 			min: 0,
 			max: this._slider.clientWidth,
@@ -58,7 +58,7 @@ export default class StepSlider {
 		clickPosition = (clickPosition < area.min) ? area.min
 			: (clickPosition > area.max) ? area.max
 			: clickPosition;
-		const value = Math.round(clickPosition / stepWidth);
+		let value = Math.round(clickPosition / stepWidth);
 
 		if (value === this._value) return;
 
@@ -73,7 +73,7 @@ export default class StepSlider {
 
 	_sliderClickHandler (event) {
 		const slider = event.target.closest('.slider');
-		const stepWidth = this._slider.clientWidth / (this._steps - 1);
+		const stepWidth = this._slider.clientWidth / (this._steps);
 		const value = this._getValue(event);
 		const stepWidthInPercents = Math.round(stepWidth * 100 / slider.clientWidth);
 		slider.querySelector('.slider__thumb').style.left = `${value * stepWidthInPercents}%`;
